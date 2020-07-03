@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Aula31WhatsAppConsole
 {
@@ -6,7 +7,12 @@ namespace Aula31WhatsAppConsole
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Agenda a = new Agenda();
+            a.Nome =  "Ana";
+            a.Telefone = "9503412860";
+
+            a.Cadastrar(a);
+            a.Remover("Ana");
         }
     }
 }
