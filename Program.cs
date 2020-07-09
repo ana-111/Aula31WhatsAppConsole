@@ -7,12 +7,18 @@ namespace Aula31WhatsAppConsole
     {
         static void Main(string[] args)
         {
+            
             Agenda a = new Agenda();
-            a.Nome =  "Ana";
-            a.Telefone = "9503412860";
+            Contato c1 = new Contato ("Ana", "92148121");
 
-            a.Cadastrar(a);
-            a.Remover("Ana");
+            Contato c2 = new Contato ();
+            c2.Nome = "Andreia";
+            c2.Telefone = "921563610";
+            
+            
+
+            a.Cadastrar ( c1 );
+            a.RemoverContato("Ana");
         }
     }
 }

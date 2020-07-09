@@ -6,29 +6,7 @@ namespace Aula31WhatsAppConsole
 {
     public class Agenda : IAgenda
     {
-
-        public Agenda(string nome, string telefone)
-        {
-            this.Nome = nome;
-            this.Telefone = telefone;
-
-        }
-        public string Nome { get; set; }
-
-        internal void Cadastrar(Agenda a)
-        {
-            string[] linha = new string[] { PrepararLinha(a) };
-            File.AppendAllLines(PATH, linha);
-        }
-
-        internal void Remover(string v)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string Telefone { get; set; }
         private const string PATH = "Database/produto.csv";
-        private object contatos;
 
         public Agenda()
         {
@@ -38,20 +16,21 @@ namespace Aula31WhatsAppConsole
             }
         }
 
-        public void CadastrarContato(Agenda a)
+        public void Cadastrar(Contato c)
         {
-            string[] linha = new string[] { PrepararLinha(a) };
+            string[] linha = new string[] { PrepararLinha(c) };
             File.AppendAllLines(PATH, linha);
         }
 
-        private string PrepararLinha(Agenda a)
+        private string PrepararLinha(Contato c)
         {
-            throw new NotImplementedException();
+            return $"R$ {c.Nome};{c.Telefone}";
         }
 
         public void Listar()
         {
             List<Agenda> prod = new List<Agenda>();
+
             string[] linhas = File.ReadAllLines(PATH);
 
             foreach (string linha in linhas)
@@ -59,10 +38,9 @@ namespace Aula31WhatsAppConsole
                 string[] dado = linha.Split(";");
 
             }
-
         }
 
-        public void RemoverContato(string _agenda)
+        public void RemoverContato(string _termo)
         {
             List<string> contatos = new List<string>();
 
@@ -72,24 +50,16 @@ namespace Aula31WhatsAppConsole
                 while ((contato = file.ReadLine()) != null)
                 {
                     contatos.Add(contato);
+            }        
                 }
-                contatos.RemoveAll(l => l.Contains( _agenda ));
-            }
-
+            contatos.RemoveAll(l => l.Contains(_termo));
+                
             using (StreamWriter output = new StreamWriter(PATH))
             {
                 output.Write(string.Join(Environment.NewLine, contatos.ToArray()));
             }
-        }
-
-        public void CadastrarContato(int _cod, Agenda _contatoCadastrado)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoverContato(Agenda _agenda)
-        {
-            throw new NotImplementedException();
+            
         }
     }
+
 }
